@@ -1,78 +1,34 @@
-<<<<<<< HEAD
-# flow2code
-Visual Flowchart Programming in the Age of LLMs
-=======
-# React + TypeScript + Vite
+# [Project Name]
+### Visual Flowchart Programming in the Age of LLMs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-Currently, two official plugins are available:
+**[Project Name]** is a spatial programming environment designed to orchestrate Large Language Models through an intuitive, node-based interface. Stop fighting with nested prompt strings and start mapping your AI's logic visually.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🧠 Why this project?
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **From "Magic" to Maps:** LLM interactions often feel like a black box. This project turns unpredictable text prompts into **deterministic visual flows**, allowing you to audit, debug, and understand exactly how your AI arrives at an answer.
+* **Syntax-Free Scalability:** As LLM chains grow in complexity, code becomes a tangled mess of nested functions. By using a **node-based architecture**, you can scale your AI logic horizontally without getting lost in "if-else" hell or recursive loops.
+* **The Bridge for Non-Coders:** We are entering an era where domain experts—not just engineers—need to shape AI behavior. This interface provides a **common language** for developers and creative strategists to collaborate on the same canvas.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ Key Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* **Drag-and-Drop Orchestration:** Connect LLMs, Vector Databases, and API tools with simple visual wires.
+* **Real-Time Execution Trace:** Watch data flow through your nodes in real-time to spot bottlenecks or "hallucination points."
+* **Modular Node System:** Easily create custom nodes for specific tasks (e.g., Sentiment Analysis, PDF Parsing, or Image Generation).
+* **Versioned Prompting:** Save and swap prompt versions within individual nodes without breaking the entire chain.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Quick Start
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
->>>>>>> ea3a159 (all the files)
+### 1. Installation
+```bash
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+cd your-repo-name
+npm install  # or pip install -r requirements.txt
