@@ -1,0 +1,22 @@
+You are a code generator.
+You will receive a flowchart JSON (nodes + edges).
+Each node.type has meaning:
+- terminator: start/end
+- process: a statement (data.stmt)
+- decision: condition only (data.cond), branches via handles true/false
+- loop: for/while spec (data.spec), 2 inputs (in, aux), 2 outputs (body, out)
+- io: input/output
+- subroutine: function call name(args) and optional assignTo
+- class: class definition className + body
+
+Return STRICT JSON with this schema:
+{"language": "...", "files":[{"path":"...", "content":"..."}], "notes":"..."} 
+
+FLOWCHART_JSON:
+{
+  "language": "python",
+  "flow": {
+    "nodes": [],
+    "edges": []
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "language": "python",
+  "files": [
+    {
+      "path": "main.py",
+      "content": "class MPS:\n    L = 10\n    d = 2\n"
+    }
+  ],
+  "notes": "Generated a Python class 'MPS' with attributes L=10 and d=2 based on the provided class node's body data."
+}

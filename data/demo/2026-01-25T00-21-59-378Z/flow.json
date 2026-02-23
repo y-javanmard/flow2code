@@ -1,0 +1,120 @@
+{
+  "nodes": [
+    {
+      "id": "class-_IPq-Al6",
+      "type": "class",
+      "position": {
+        "x": 1360,
+        "y": 360
+      },
+      "data": {
+        "w": 160,
+        "h": 100,
+        "className": "Tensor",
+        "body": "dim=3; dtype=complex"
+      },
+      "width": 160,
+      "height": 100,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 1360,
+        "y": 360
+      },
+      "dragging": false
+    },
+    {
+      "id": "process-TGtjxSFK",
+      "type": "process",
+      "position": {
+        "x": 1320,
+        "y": 500
+      },
+      "data": {
+        "w": 260,
+        "h": 110,
+        "stmt": "B(a_l=1, d=2, a_r=1)",
+        "userSized": true
+      },
+      "width": 260,
+      "height": 110,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 1320,
+        "y": 500
+      },
+      "dragging": false,
+      "style": {
+        "width": 260,
+        "height": 110
+      },
+      "resizing": false
+    },
+    {
+      "id": "terminator-WHVKqmvm",
+      "type": "terminator",
+      "position": {
+        "x": 1320,
+        "y": 720
+      },
+      "data": {
+        "w": 220,
+        "h": 60,
+        "title": "return B"
+      },
+      "width": 220,
+      "height": 60,
+      "selected": true,
+      "positionAbsolute": {
+        "x": 1320,
+        "y": 720
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 18,
+        "height": 18
+      },
+      "style": {
+        "stroke": "#111",
+        "strokeWidth": 2
+      },
+      "labelStyle": {
+        "fill": "#111",
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "source": "class-_IPq-Al6",
+      "sourceHandle": null,
+      "target": "process-TGtjxSFK",
+      "targetHandle": null,
+      "id": "reactflow__edge-class-_IPq-Al6-process-TGtjxSFK"
+    },
+    {
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 18,
+        "height": 18
+      },
+      "style": {
+        "stroke": "#111",
+        "strokeWidth": 2
+      },
+      "labelStyle": {
+        "fill": "#111",
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "source": "process-TGtjxSFK",
+      "sourceHandle": null,
+      "target": "terminator-WHVKqmvm",
+      "targetHandle": null,
+      "id": "reactflow__edge-process-TGtjxSFK-terminator-WHVKqmvm"
+    }
+  ]
+}

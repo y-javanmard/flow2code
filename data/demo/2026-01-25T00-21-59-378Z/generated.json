@@ -1,0 +1,10 @@
+{
+  "language": "python",
+  "files": [
+    {
+      "path": "main.py",
+      "content": "class Tensor:\n    # Class-level attributes derived from the class node's body\n    dim = 3\n    dtype = complex\n\n    def __init__(self, a_l, d, a_r):\n        # Instance attributes derived from the process node's instantiation call\n        self.a_l = a_l\n        self.d = d\n        self.a_r = a_r\n\ndef create_and_return_tensor_instance():\n    # Process node: Interpreted as instantiating the Tensor class and assigning to 'B'\n    B = Tensor(a_l=1, d=2, a_r=1)\n    \n    # Terminator node: Return the created instance\n    return B\n\nif __name__ == \"__main__\":\n    my_tensor_instance = create_and_return_tensor_instance()\n    print(f\"Created Tensor instance: {my_tensor_instance}\")\n    print(f\"  Class attributes: dim={my_tensor_instance.dim}, dtype={my_tensor_instance.dtype}\")\n    print(f\"  Instance attributes: a_l={my_tensor_instance.a_l}, d={my_tensor_instance.d}, a_r={my_tensor_instance.a_r}\")\n"
+    }
+  ],
+  "notes": "The 'class' node 'Tensor' defines class-level attributes 'dim' and 'dtype' from its `data.body` string. The `data.body` was parsed as `;`-separated key-value pairs.\n\nThe 'process' node with `data.stmt: \"B(a_l=1, d=2, a_r=1)\"` is interpreted as an instantiation of the 'Tensor' class, assigning the new instance to the variable `B`. This implies that the `Tensor` class needs an `__init__` method that accepts `a_l`, `d`, and `a_r` as parameters to set instance attributes.\n\nThe 'terminator' node 'return B' signifies the end of the logical flow and indicates that the variable `B` should be returned. The entire sequence (class definition, instantiation, and return) is encapsulated in a function named `create_and_return_tensor_instance` for logical grouping and reusability, with the class itself defined at the top level for broader scope. An `if __name__ == \"__main__\":` block is included for demonstration."
+}
