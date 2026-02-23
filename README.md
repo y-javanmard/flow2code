@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # [Project Name]
 ### Visual Flowchart Programming in the Age of LLMs
 =======
@@ -6,7 +6,7 @@
 Visual Flowchart Programming in the Age of LLMs
 =======
 # React + TypeScript + Vite
->>>>>>> 7c201eb8f838a1c129705d7d2537a4bcd88e8175
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
