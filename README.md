@@ -32,10 +32,10 @@
 git clone [https://github.com/y-javanmard/flow2code.git](https://github.com/y-javanmard/flow2code.git)
 cd flow2code
 npm install
+```
 
 
-
-
+![My project logo](demo.png)
 
 -----
 
@@ -53,6 +53,7 @@ PINECONE_API_KEY=your_vector_db_key
 
 
 ## then run:
+```bash
 npm run dev
-
+```
 and open the http url.
