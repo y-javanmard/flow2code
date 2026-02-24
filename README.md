@@ -34,9 +34,12 @@ cd flow2code
 npm install
 ```
 
+The folling demo is for neural networks:
 
 ![My project logo](demo.png)
 
+This one is for tensor networks:
+![My project logo](demo_tn.png)
 -----
 
 ### 2. Configure Environment
