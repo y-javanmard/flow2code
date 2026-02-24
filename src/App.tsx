@@ -11,6 +11,8 @@ import { makePromptPack } from "./compiler";
 import { allPresets, getPresetById } from "./presets";
 import type { PresetNodeTemplate } from "./presets";
 import CodeViewer from "./CodeViewer";
+import { ArchitectureBuilder } from "./ArchitectureBuilder";
+import { architectureTemplates } from "./presets";
 
 async function generateWithGemini(promptPack: string, language: string) {
   const r = await fetch("/api/generate-code", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ promptPack, language }) });
@@ -237,8 +239,8 @@ function Inspector() {
 }
 
 /* ─── Toolbar ─── */
-function Toolbar({ onExport, onGenerate, onExportPng, onSaveProject, isGenerating }: {
-  onExport: () => void; onGenerate: () => void; onExportPng: () => void; onSaveProject: () => void; isGenerating: boolean;
+function Toolbar({ onExport, onGenerate, onExportPng, onSaveProject, isGenerating, onShowArchBuilder }: {
+  onExport: () => void; onGenerate: () => void; onExportPng: () => void; onSaveProject: () => void; isGenerating: boolean; onShowArchBuilder: () => void;
 }) {
   const addNode = useStore((s) => s.addNode);
   const addDomainNode = useStore((s) => s.addDomainNode);
@@ -263,6 +265,7 @@ function Toolbar({ onExport, onGenerate, onExportPng, onSaveProject, isGeneratin
         <button style={actionBtn} onClick={onExport}>📋 Pack</button>
         <button style={actionBtn} onClick={onExportPng}>🖼 PNG</button>
         <button style={actionBtn} onClick={onSaveProject}>💾 Save</button>
+        <button style={{ ...actionBtn, background: "#8b5cf6", color: "white", border: "none" }} onClick={onShowArchBuilder}>🏗️ Templates</button>
         <button style={{ ...actionBtn, background: isGenerating ? "#f3f4f6" : "#059669", color: isGenerating ? "#999" : "white", border: "none" }} onClick={onGenerate} disabled={isGenerating}>
           {isGenerating ? "⏳…" : "⚡ Generate"}
         </button>
@@ -291,6 +294,42 @@ function downloadDataUrl(dataUrl: string, filename: string) {
   document.body.appendChild(a); a.click(); a.remove();
 }
 
+// Helper function to create presets map
+function getTemplatePresetsMap() {
+  const map: Record<string, any> = {};
+  
+  const neuralNetTemplates = [
+    { key: "input_layer", icon: "📥", category: "Layers", color: "#059669", params: [], desc: "Input tensor shape", outputType: "tensor", inputTypes: [] },
+    { key: "dense", icon: "🔗", category: "Layers", color: "#2563eb", params: [], desc: "Fully connected layer", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "conv2d", icon: "🔲", category: "Layers", color: "#7c3aed", params: [], desc: "2D Convolution", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "conv1d", icon: "📊", category: "Layers", color: "#7c3aed", params: [], desc: "1D Convolution", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "lstm", icon: "🔁", category: "Layers", color: "#dc2626", params: [], desc: "Long Short-Term Memory", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "gru", icon: "🔁", category: "Layers", color: "#dc2626", params: [], desc: "Gated Recurrent Unit", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "embedding", icon: "📝", category: "Layers", color: "#0891b2", params: [], desc: "Embedding layer for sequences", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "attention", icon: "👁", category: "Layers", color: "#c026d3", params: [], desc: "Multi-head attention", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "transformer", icon: "⚡", category: "Layers", color: "#c026d3", params: [], desc: "Full transformer encoder block", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "maxpool2d", icon: "⬇️", category: "Pooling", color: "#0d9488", params: [], desc: "Max pooling 2D", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "avgpool2d", icon: "⬇️", category: "Pooling", color: "#0d9488", params: [], desc: "Average pooling 2D", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "globalavgpool", icon: "🌐", category: "Pooling", color: "#0d9488", params: [], desc: "Global average pooling", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "flatten", icon: "📏", category: "Pooling", color: "#0d9488", params: [], desc: "Flatten to 1D", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "reshape", icon: "🔀", category: "Pooling", color: "#0d9488", params: [], desc: "Reshape tensor", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "dropout", icon: "💧", category: "Regularization", color: "#d97706", params: [], desc: "Dropout regularization", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "batchnorm", icon: "📐", category: "Regularization", color: "#d97706", params: [], desc: "Batch normalization", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "layernorm", icon: "📐", category: "Regularization", color: "#d97706", params: [], desc: "Layer normalization", outputType: "tensor", inputTypes: ["tensor"] },
+    { key: "add", icon: "➕", category: "Operations", color: "#64748b", params: [], desc: "Element-wise add (skip connection)", outputType: "tensor", inputTypes: ["tensor", "tensor"] },
+    { key: "concatenate", icon: "🔗", category: "Operations", color: "#64748b", params: [], desc: "Concatenate tensors", outputType: "tensor", inputTypes: ["tensor", "tensor"] },
+    { key: "output_layer", icon: "📤", category: "Output", color: "#be185d", params: [], desc: "Output layer", outputType: "prediction", inputTypes: ["tensor"] },
+    { key: "compile", icon: "⚙️", category: "Training", color: "#374151", params: [], desc: "Compile model", outputType: "model", inputTypes: ["prediction"] },
+    { key: "fit", icon: "🏋️", category: "Training", color: "#374151", params: [], desc: "Train the model", outputType: "history", inputTypes: ["model"] },
+  ];
+
+  for (const t of neuralNetTemplates) {
+    map[t.key] = t;
+  }
+
+  return map;
+}
+
 /* ─── App ─── */
 export default function App() {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect, selectNode } = useStore();
@@ -302,6 +341,7 @@ export default function App() {
   const [genFiles, setGenFiles] = useState<{ path: string; content: string }[]>([]);
   const [projectName, setProjectName] = useState("demo");
   const [saveStatus, setSaveStatus] = useState("");
+  const [showArchBuilder, setShowArchBuilder] = useState(false);
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const [sidebarW, setSidebarW] = useState(460);
 
@@ -370,7 +410,7 @@ export default function App() {
     <div style={{ display: "flex", height: "100vh", width: "100vw" }}>
       <div ref={canvasRef} style={{ flex: 1, position: "relative", height: "100%", width: "100%" }}>
         <ReactFlow {...rfProps} style={{ width: "100%", height: "100%", background: "#f8fafc" }}>
-          <Toolbar onExport={exportPack} onGenerate={runGeminiCodegen} onExportPng={exportPng} onSaveProject={saveProject} isGenerating={isGenerating} />
+          <Toolbar onExport={exportPack} onGenerate={runGeminiCodegen} onExportPng={exportPng} onSaveProject={saveProject} isGenerating={isGenerating} onShowArchBuilder={() => setShowArchBuilder(true)} />
           <Background variant="dots" gap={20} size={1.2} color="#d1d5db" />
           <MiniMap nodeColor={minimapNodeColor} style={{ borderRadius: 10, border: "1px solid #e5e7eb" }} />
           <Controls style={{ borderRadius: 10 }} />
@@ -413,6 +453,13 @@ export default function App() {
           </Panel>
         </div>
       </div>
+
+      {/* Architecture Builder Modal */}
+      <ArchitectureBuilder 
+        isOpen={showArchBuilder}
+        onClose={() => setShowArchBuilder(false)}
+        presets={getTemplatePresetsMap()}
+      />
     </div>
   );
 }
