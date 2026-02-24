@@ -10,6 +10,10 @@
 
 ## 🧠 Why Flow2Code?
 
+* **Algorithms remain invariant:**  $$U O_{\text{algorithm}}U^\dagger = \tilde{O}_{\text{algorithm}}$$
+
+There are countless ways to implement the exact same algorithm, but the core mathematical concept always remains the same. In scientific computing, the best way to explain a codebase is by communicating the underlying numerical ideas in a high-level language. Unfortunately, traditional documentation is often exhaustive, detached from the code, and exhausting to read. This project aims to fix that by bringing high-level, conceptual documentation directly to the code itself, making the science behind the software immediately clear and easy to follow.
+
 * **From "Magic" to Maps:** LLM interactions often feel like a black box. This project turns unpredictable text prompts into **deterministic visual flows**, allowing you to audit, debug, and understand exactly how your AI arrives at an answer.
 * **Syntax-Free Scalability:** As LLM chains grow in complexity, code becomes a tangled mess of nested functions. By using a **node-based architecture**, you can scale your AI logic horizontally without getting lost in "if-else" hell.
 * **The Bridge for Non-Coders:** We are entering an era where domain experts need to shape AI behavior. This interface provides a **common language** for developers and creative strategists to collaborate on the same canvas.
