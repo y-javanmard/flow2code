@@ -44,8 +44,8 @@ Create a .env file in the root directory and add your API keys:
 
 # AI Provider Keys
 OPENAI_API_KEY=your_openai_key_here
-ANTHROPIC_API_KEY=your_claude_key_here
-
+ANTHROPIC_API_KEY=your_LLM-service_key_here (Gemini, Claude, ...)
+ 
 # Optional: Database or Tooling Keys
 DATABASE_URL=your_db_connection_string
 PINECONE_API_KEY=your_vector_db_key
